@@ -59,6 +59,11 @@ let home = async (req, res) => {
   return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
 }
 
+let calculate = async (req, res) => {
+  console.log(req.body);
+  return res.send(req.body)
+}
+
 module.exports = {
-  home
+  home, calculate
 }

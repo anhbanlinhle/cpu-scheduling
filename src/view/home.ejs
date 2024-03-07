@@ -8,24 +8,26 @@
 <body>
     <div class="container">
         <div class="dropdown-container">
-            <select name="dropdown" id="dropdown" onchange="handleDropdownChange()">
-                <option value="option1">First Come First Serve</option>
-                <option value="option2">Shortest Job First</option>
-                <option value="option3">Shortest Remaining Time First</option>
-                <option value="option4">Non-preemptive Priority</option>
-                <option value="option5">Preemptive Priority</option>
-                <option value="option6">Round Robin</option>
+            <form action="/" method="post">
+            <select name="algorithm" id="dropdown" onchange="handleDropdownChange()">
+                <option value="fcfs">First Come First Serve</option>
+                <option value="sjf">Shortest Job First</option>
+                <option value="srtf">Shortest Remaining Time First</option>
+                <option value="np">Non-preemptive Priority</option>
+                <option value="pp">Preemptive Priority</option>
+                <option value="rr">Round Robin</option>
             </select>
-            <select id="round_robin_dropdown" class="hidden"> 
+            <select name="quantum_time" id="round_robin_dropdown" class="hidden"> 
                 <% for (let i = 1; i <= 10; i++) { %>
                     <option value="<%= i %>">Qtime = <%= i %></option>
                 <% } %>
             </select>
-            <select id="priority_dropdown" class="hidden">
+            <select name="priority_order" id="priority_dropdown" class="hidden">
               <option value="highest">Highest First</option>
               <option value="lowest">Lowest First</option>
             </select>
-            <button type="submit">Submit</button>
+            <button type="submit" action="/process" method="post">Submit</button>
+            </form>
         </div>
 
         <h2>Process Statistic Table</h2>
@@ -90,13 +92,13 @@
         function handleDropdownChange() {
             const selectedOption = document.getElementById("dropdown").value;
             const roundRobinDropdown = document.getElementById("round_robin_dropdown");
-            if (selectedOption === "option6") {
+            if (selectedOption === "rr") {
                 roundRobinDropdown.classList.remove("hidden");
             } else {
                 roundRobinDropdown.classList.add("hidden");
             }
             const priorityDropdown = document.getElementById("priority_dropdown");
-            if (selectedOption === "option4" || selectedOption === "option5") {
+            if (selectedOption === "np" || selectedOption === "pp") {
                 priorityDropdown.classList.remove("hidden");
             } else {
                 priorityDropdown.classList.add("hidden");

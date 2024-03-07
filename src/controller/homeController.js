@@ -86,10 +86,10 @@ let calculate = async (req, res) => {
       processes = srtf(JSON.parse(inputData))
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'np':
-      processes = np(JSON.parse(inputData))
+      processes = np(JSON.parse(inputData), req.body.priority_order)
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'pp':
-      processes = pp(JSON.parse(inputData))
+      processes = pp(JSON.parse(inputData), req.body.priority_order)
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'rr':
       processes = rr(JSON.parse(inputData), req.body.quantum_time)

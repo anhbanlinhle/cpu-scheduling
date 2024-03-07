@@ -64,12 +64,12 @@ let home = async (req, res) => {
     averageTurnaroundTime: 0.0,
     averageWaitTime: 0.0
   }
-  let prev = { algorithm: 'fcfs'}
+  let prev = { algorithm: ''}
   return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: prev})
 }
 
 let calculate = async (req, res) => {
-  let jsonFile = path.join(__dirname, '../public/data/process1.json')
+  let jsonFile = path.join(__dirname, '../public/data/process.json')
   const inputData = fs.readFileSync(jsonFile, 'utf8')
 
   let algorithm = req.body.algorithm
@@ -86,12 +86,21 @@ let calculate = async (req, res) => {
       processes = srtf(JSON.parse(inputData))
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'np':
+      if (req.body.priority_order === undefined) {
+        req.body.priority_order = 'highest'
+      }
       processes = np(JSON.parse(inputData), req.body.priority_order)
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'pp':
+      if (req.body.priority_order === undefined) {
+        req.body.priority_order = 'highest'
+      }
       processes = pp(JSON.parse(inputData), req.body.priority_order)
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'rr':
+      if (req.body.quantum_time === undefined) {
+        req.body.quantum_time = 2
+      }
       processes = rr(JSON.parse(inputData), req.body.quantum_time)
       return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     default:

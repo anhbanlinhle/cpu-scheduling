@@ -1,10 +1,107 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-</head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CPU Scheduling</title>
+    <link rel="stylesheet" href="/css/style.css"> </head>
 <body>
-  hello from boilerplate
+    <div class="container">
+        <div class="dropdown-container">
+            <select name="dropdown" id="dropdown" onchange="handleDropdownChange()">
+                <option value="option1">First Come First Serve</option>
+                <option value="option2">Shortest Job First</option>
+                <option value="option3">Shortest Remaining Time First</option>
+                <option value="option4">Non-preemptive Priority</option>
+                <option value="option5">Preemptive Priority</option>
+                <option value="option6">Round Robin</option>
+            </select>
+            <select id="round_robin_dropdown" class="hidden"> 
+                <% for (let i = 1; i <= 10; i++) { %>
+                    <option value="<%= i %>">Qtime = <%= i %></option>
+                <% } %>
+            </select>
+            <select id="priority_dropdown" class="hidden">
+              <option value="highest">Highest First</option>
+              <option value="lowest">Lowest First</option>
+            </select>
+            <button type="submit">Submit</button>
+        </div>
+
+        <h2>Process Statistic Table</h2>
+        <table class="table1">
+            <thead>
+                <tr>
+                    <th>PName</th>
+                    <th>Arrival</th>
+                    <th>Burst</th>
+                    <th>Priority</th>
+                    <th>Response Time</th>
+                    <th>Waiting Time</th>
+                    <th>Turnaround Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (let i = 0; i < processes.processes.length; i++) { %>
+                    <tr>
+                        <td class="<%= processes.processes[i].name %>"><%= processes.processes[i].name %></td>
+                        <td><%= processes.processes[i].arrive %></td>
+                        <td><%= processes.processes[i].burst %></td>
+                        <td><%= processes.processes[i].priority %></td>
+                        <td><%= processes.processes[i].responseTime %></td>
+                        <td><%= processes.processes[i].waitTime %></td>
+                        <td><%= processes.processes[i].turnaroundTime %></td>
+                    </tr>
+                <% } %>
+                <tr>
+                    <td>Average</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td>-</td>
+                    <td><%= processes.averageResponseTime %></td>
+                    <td><%= processes.averageWaitTime %></td>
+                    <td><%= processes.averageTurnaroundTime %></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2>Gantt Chart</h2>
+        <table class="table2">
+            <tbody>
+                <tr class="chart">
+                  <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none"></td>
+                  <% for (let i = 0; i < gantt_chart.length; i++) { %>
+                    <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none"
+                    class="<%= gantt_chart[i] %>"></td>
+                  <% } %>
+                </tr>
+                <tr>
+                  <% for (let i = 0; i <= gantt_chart.length; i++) { %>
+                    <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none;
+                    text-align: right"
+                    ><%= i %></td>
+                  <% } %>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        function handleDropdownChange() {
+            const selectedOption = document.getElementById("dropdown").value;
+            const roundRobinDropdown = document.getElementById("round_robin_dropdown");
+            if (selectedOption === "option6") {
+                roundRobinDropdown.classList.remove("hidden");
+            } else {
+                roundRobinDropdown.classList.add("hidden");
+            }
+            const priorityDropdown = document.getElementById("priority_dropdown");
+            if (selectedOption === "option4" || selectedOption === "option5") {
+                priorityDropdown.classList.remove("hidden");
+            } else {
+                priorityDropdown.classList.add("hidden");
+            }
+        }
+    </script>
 </body>
 </html>

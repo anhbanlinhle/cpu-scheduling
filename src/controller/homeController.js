@@ -1,6 +1,12 @@
 import { json } from 'body-parser'
 import fs from 'fs'
 import path from 'path'
+import { fcfs } from '../model/fcfs'
+import { sjf } from '../model/sjf'
+import { srtf } from '../model/srtf'
+import { np } from '../model/np'
+import { pp } from '../model/pp'
+import { rr } from '../model/rr'
 
 let home = async (req, res) => {
   let processes = {
@@ -62,10 +68,34 @@ let home = async (req, res) => {
 }
 
 let calculate = async (req, res) => {
-  let jsonFile = path.join(__dirname, '../public/data/process.json')
-  const processes = fs.readFileSync(jsonFile, 'utf8')
-  
-  return res.send(processes)
+  let jsonFile = path.join(__dirname, '../public/data/process1.json')
+  const inputData = fs.readFileSync(jsonFile, 'utf8')
+
+  let algorithm = req.body.algorithm
+
+  let processes = {}
+  switch (algorithm) {
+    case 'fcfs':
+      processes = fcfs(JSON.parse(inputData))
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    case 'sjf':
+      processes = sjf(JSON.parse(inputData))
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    case 'srtf':
+      processes = srtf(JSON.parse(inputData))
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    case 'np':
+      processes = np(JSON.parse(inputData))
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    case 'pp':
+      processes = pp(JSON.parse(inputData))
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    case 'rr':
+      processes = rr(JSON.parse(inputData), req.body.quantum_time)
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+    default:
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+  }
 }
 
 module.exports = {

@@ -1,12 +1,12 @@
 let srtf = (processes) => {
   processes.sort((a, b) => a.arrive - b.arrive);
-  for (i = 0; i < processes.length; i++) {
+  for (let i = 0; i < processes.length; i++) {
     processes[i].remainingTime = processes[i].burst
   }
 
   let ganttChart = [];
   let currentTime = 0;
-  results = []
+  let results = []
 
   while (processes.length > 0) {
     // get shortest burst time process arrived

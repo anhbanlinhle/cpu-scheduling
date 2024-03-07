@@ -1,6 +1,6 @@
 function rr(processes, timeQuantum) {
-  results = [...processes].sort((a, b) => a.arrive - b.arrive);
-  for (i = 0; i < results.length; i++) {
+  let results = [...processes].sort((a, b) => a.arrive - b.arrive);
+  for (let i = 0; i < results.length; i++) {
     results[i].remainingTime = results[i].burst
   }
 

@@ -22,7 +22,13 @@ let np = (processes) => {
     }
 
     if (highestPriority === -Infinity) {
-      const nextArrival = processes.reduce((min, process) => Math.min(min, process.arrive), Infinity);
+      // const nextArrival = processes.reduce((min, process) => Math.min(min, process.arrive), Infinity);
+      let nextArrival = Infinity;
+      for (let i = 0; i < processes.length; i++) {
+        if (processes[i].arrive < nextArrival && !processes[i].processed) {
+          nextArrival = processes[i].arrive;
+        }
+      }
       const waitingTime = nextArrival - currentTime;
       ganttChart.push(...Array(waitingTime).fill('-'));
       currentTime = nextArrival;

@@ -64,7 +64,8 @@ let home = async (req, res) => {
     averageTurnaroundTime: 0.0,
     averageWaitTime: 0.0
   }
-  return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+  let prev = { algorithm: 'fcfs'}
+  return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: prev})
 }
 
 let calculate = async (req, res) => {
@@ -77,24 +78,24 @@ let calculate = async (req, res) => {
   switch (algorithm) {
     case 'fcfs':
       processes = fcfs(JSON.parse(inputData))
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'sjf':
       processes = sjf(JSON.parse(inputData))
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'srtf':
       processes = srtf(JSON.parse(inputData))
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'np':
       processes = np(JSON.parse(inputData))
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'pp':
       processes = pp(JSON.parse(inputData))
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     case 'rr':
       processes = rr(JSON.parse(inputData), req.body.quantum_time)
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
     default:
-      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart})
+      return res.render('home.ejs', {processes: processes, gantt_chart: processes.ganttChart, prev: req.body})
   }
 }
 

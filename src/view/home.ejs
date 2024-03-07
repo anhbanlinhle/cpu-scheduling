@@ -89,6 +89,22 @@
     </div>
 
     <script>
+        window.onload = function() {
+            let algorithm = "<%= prev.algorithm %>"
+            const dropdown = document.getElementById("dropdown");
+            dropdown.value = algorithm;
+
+            let quantumTime = "<%= prev.quantum_time %>"
+            const rrDropdown = document.getElementById("round_robin_dropdown");
+            rrDropdown.value = quantumTime;
+
+            let priorityOrder = "<%= prev.priority_order %>"
+            const priorityDropdown = document.getElementById("priority_dropdown");
+            priorityDropdown.value = priorityOrder;
+
+            handleDropdownChange();
+        }
+        
         function handleDropdownChange() {
             const selectedOption = document.getElementById("dropdown").value;
             const roundRobinDropdown = document.getElementById("round_robin_dropdown");

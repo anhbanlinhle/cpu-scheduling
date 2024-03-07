@@ -1,4 +1,4 @@
-let pp = (processes) => {
+let pp = (processes, order) => {
   processes.sort((a, b) => a.arrive - b.arrive);
   for (let i = 0; i < processes.length; i++) {
     processes[i].remainingTime = processes[i].burst
@@ -9,18 +9,32 @@ let pp = (processes) => {
   let results = []
 
   while (processes.length > 0) {
-    // get highest priority process arrived
-    let highestPriority = -Infinity;
+    let highestPriority = null;
     let highestPriorityIndex = null;
-    for (let i = 0; i < processes.length; i++) {
-      if (processes[i].arrive <= currentTime) {
-        if (processes[i].priority > highestPriority) {
-          highestPriority = processes[i].priority;
-          highestPriorityIndex = processes[i].priority;
-          highestPriorityIndex = i;
+
+    if (order === 'highest') {
+      highestPriority = -Infinity;
+      for (let i = 0; i < processes.length; i++) {
+        if (processes[i].arrive <= currentTime) {
+          if (processes[i].priority > highestPriority) {
+            highestPriority = processes[i].priority;
+            highestPriorityIndex = i;
+          }
         }
       }
     }
+    else if (order === 'lowest') {
+      highestPriority = Infinity;
+      for (let i = 0; i < processes.length; i++) {
+        if (processes[i].arrive <= currentTime) {
+          if (processes[i].priority < highestPriority) {
+            highestPriority = processes[i].priority;
+            highestPriorityIndex = i;
+          }
+        }
+      }
+    }
+    
 
     // if no process ready, wait until next arrival
     if (highestPriorityIndex === null) {

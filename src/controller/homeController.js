@@ -1,4 +1,6 @@
-import { json } from 'body-parser';
+import { json } from 'body-parser'
+import fs from 'fs'
+import path from 'path'
 
 let home = async (req, res) => {
   let processes = {
@@ -60,8 +62,10 @@ let home = async (req, res) => {
 }
 
 let calculate = async (req, res) => {
-  console.log(req.body);
-  return res.send(req.body)
+  let jsonFile = path.join(__dirname, '../public/data/process.json')
+  const processes = fs.readFileSync(jsonFile, 'utf8')
+  
+  return res.send(processes)
 }
 
 module.exports = {

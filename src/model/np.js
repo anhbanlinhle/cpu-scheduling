@@ -1,4 +1,4 @@
-let np = (processes) => {
+let np = (processes, order) => {
   processes.sort((a, b) => a.arrive - b.arrive);
 
   for (let i = 0; i < processes.length; i++) {
@@ -11,17 +11,33 @@ let np = (processes) => {
 
   while (processedCount < processes.length) {
     let highestPriorityProcessIndex = 0;
-    let highestPriority = -Infinity;
-    for (let i = 0; i < processes.length; i++) {
-      if (processes[i].arrive <= currentTime && !processes[i].processed) {
-        if (processes[i].priority > highestPriority) { 
-          highestPriorityProcessIndex = i;
-          highestPriority = processes[i].priority;
+    let highestPriority = null;
+
+    if (order === 'highest') {
+      highestPriority = -Infinity;
+      for (let i = 0; i < processes.length; i++) {
+        if (processes[i].arrive <= currentTime && !processes[i].processed) {
+          if (processes[i].priority > highestPriority) { 
+            highestPriorityProcessIndex = i;
+            highestPriority = processes[i].priority;
+          }
         }
       }
     }
+    else if (order === 'lowest') {
+      highestPriority = Infinity;
+      for (let i = 0; i < processes.length; i++) {
+        if (processes[i].arrive <= currentTime && !processes[i].processed) {
+          if (processes[i].priority < highestPriority) {
+            highestPriorityProcessIndex = i;
+            highestPriority = processes[i].priority;
+          }
+        }
+      }
+    }
+    
 
-    if (highestPriority === -Infinity) {
+    if (highestPriority === -Infinity || highestPriority === Infinity) {
       // const nextArrival = processes.reduce((min, process) => Math.min(min, process.arrive), Infinity);
       let nextArrival = Infinity;
       for (let i = 0; i < processes.length; i++) {

@@ -3,14 +3,14 @@ Simple server-side rendering webpage to illustrate CPU scheduling Gantt chart
 
 ![](src/public/img/demo.png)
 
-Suporting algorithms:
+Supporting algorithms:
 
-- First Come First Serve
-- Shortest Job First
-- Shortest Remaining Time First
-- Non-preemptive Priority (_both priority order_)
-- Preemptive Priority (_both priority order_)
-- Round Robin (_custom Qtime_)
+- `First Come First Serve`
+- `Shortest Job First`
+- `Shortest Remaining Time First`
+- `Non-preemptive Priority` (_both priority order_)
+- `Preemptive Priority` (_both priority order_)
+- `Round Robin` (_custom Qtime_)
 
 ## Prerequisite
 
@@ -22,7 +22,7 @@ npm install
 
 ## Usage
 
-To start running server, run:
+To start server, run:
 
 ```sh
 npm start

@@ -1,5 +1,6 @@
 # cpu-scheduling
 Simple server-side rendering webpage to illustrate CPU scheduling Gantt chart
+
 Suporting algorithms:
 
 - First Come First Serve

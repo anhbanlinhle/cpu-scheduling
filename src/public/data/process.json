@@ -1,0 +1,32 @@
+[
+  {
+    "name": "P1",
+    "arrive": 0,
+    "burst": 2,
+    "priority": 2
+  },
+  {
+    "name": "P2",
+    "arrive": 1,
+    "burst": 1,
+    "priority": 1
+  },
+  {
+    "name": "P3",
+    "arrive": 3,
+    "burst": 8,
+    "priority": 5
+  },
+  {
+    "name": "P4",
+    "arrive": 4,
+    "burst": 4,
+    "priority": 3
+  },
+  {
+    "name": "P5",
+    "arrive": 5,
+    "burst": 5,
+    "priority": 4
+  }
+]

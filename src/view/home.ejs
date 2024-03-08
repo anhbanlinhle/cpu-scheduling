@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CPU Scheduling</title>
-    <link rel="stylesheet" href="/css/style.css"> </head>
+    <link rel="stylesheet" href="/css/style.css">
+    <link href=" https://fonts.cdnfonts.com/css/ds-digital " rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
 <body>
     <div class="container">
         <div class="dropdown-container">
-            <form action="/" method="post">
-            <select name="algorithm" id="dropdown" onchange="handleDropdownChange()">
+            <form class="form" action="/" method="post">
+            <select name="algorithm" id="dropdown" onchange="handleDropdownChange()" required>
                 <option value="fcfs">First Come First Serve</option>
                 <option value="sjf">Shortest Job First</option>
                 <option value="srtf">Shortest Remaining Time First</option>
@@ -23,13 +26,17 @@
                 <% } %>
             </select>
             <select name="priority_order" id="priority_dropdown" class="hidden">
-              <option value="highest">Highest First</option>
-              <option value="lowest">Lowest First</option>
+                <option value="highest">Highest First</option>
+                <option value="lowest">Lowest First</option>
             </select>
             <button type="submit" action="/process" method="post">Submit</button>
-            </form>
+        </form>
+        <a href="https://github.com/anhbanlinhle" class="github-credit">
+            <i class="fa fa-github"></i> anhbanlinhle
+        </a>   
         </div>
-
+        
+        <div class="div1">
         <h2>Process Statistic Table</h2>
         <table class="table1">
             <thead>
@@ -56,7 +63,7 @@
                     </tr>
                 <% } %>
                 <tr>
-                    <td>Average</td>
+                    <td>Avg.</td>
                     <td>-</td>
                     <td>-</td>
                     <td>-</td>
@@ -66,7 +73,9 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
+        <div class="div2">
         <h2>Gantt Chart</h2>
         <table class="table2">
             <tbody>
@@ -86,6 +95,7 @@
                 </tr>
             </tbody>
         </table>
+        </div>
     </div>
 
     <script>

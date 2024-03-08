@@ -19,5 +19,5 @@ configViewEngine(app)
 initWebRoutes(app)
 
 app.listen(port, () => {
-    console.log(`Example app listening at http://localhost:${port}`)
+    console.log(`http://localhost:${port}`)
 })

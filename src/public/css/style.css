@@ -1,17 +1,39 @@
 body {
   font-family: sans-serif;
-  background-color: rgb(254, 248, 241);
+  font-size: 20px;
+  background-color: #fff;
 }
 
 .container {
-  max-width: 800px;
+  background-color: antiquewhite;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  max-width: 900px;
   margin: 0 auto;
   padding: 20px;
+}
+
+.github-credit {
+  text-decoration: none;
+  color: #333;
+  font-size: 20px;
+  justify-content: center;
+}
+
+.github-credit:hover {
+  color: #666;
+  text-align: center;
+  display: inline-block;
 }
 
 .dropdown-container {
   display: flex;
   margin-bottom: 20px;
+  justify-content: space-between;
+}
+
+.form {
+  display: flex;
 }
 
 .dropdown-container select {
@@ -42,7 +64,7 @@ th, td {
 }
 
 h2 {
-  margin: 20px 0;
+  margin: 0px 0 10px;
 }
 
 .table1 {
@@ -76,4 +98,19 @@ h2 {
 }
 .P5 {
   background-color: #e06666;
+}
+
+.div1 {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.div2 {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: #fff;
 }

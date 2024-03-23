@@ -79,20 +79,32 @@
         <h2>Gantt Chart</h2>
         <table class="table2">
             <tbody>
-                <tr class="chart">
-                  <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none"></td>
-                  <% for (let i = 0; i < gantt_chart.length; i++) { %>
-                    <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none"
-                    class="<%= gantt_chart[i] %>"></td>
-                  <% } %>
-                </tr>
-                <tr>
-                  <% for (let i = 0; i <= gantt_chart.length; i++) { %>
-                    <td style="width: calc(100% / <%= gantt_chart.length + 1 %>); border: none;
-                    text-align: right"
-                    ><%= i %></td>
-                  <% } %>
-                </tr>
+                <% for (let j = 0; j < Math.ceil(gantt_chart.length / 19) ; j++) { %>
+                    <tr class="chart">
+                    <% let border = "border-left: none; border-right: none" %>
+
+                    <% for (let i = 0; i <= 19; i++) { %>
+                        <% let index = i + j * 19 %>
+                        <% if (index < gantt_chart.length && index >= 0) { %>
+                            <% if (gantt_chart[index] !== gantt_chart[index - 1]) { %>
+                                <% border = "border-left: solid #979797 1px; border-right: none" %>
+                            <% } else { %>
+                                <% border = "border-left: none; border-right: none" %>
+                            <% } %>
+                        <% } %>
+
+                        <td style="width: calc(100% / <%= 19 %>); <%= border %>"
+                        class="<%= gantt_chart[index] %>"></td>
+                    <% } %>
+                    </tr>
+                    <tr>
+                    <% for (let i = 1; i <= 20; i++) { %>
+                        <td style="width: calc(100% / <%= 19 %>); border: none;
+                        text-align: right"
+                        ><%= i + j * 19 %></td>
+                    <% } %>
+                    </tr>
+                <% } %>
             </tbody>
         </table>
         </div>

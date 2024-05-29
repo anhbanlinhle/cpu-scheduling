@@ -32,4 +32,14 @@ GUI is ready on __localhost:1111__
 
 ## Data
 
-To customize input processes, modify [process.json](src/public/data/process.json)
+To manually customize input processes, modify [process.json](src/public/data/process.json)
+
+Or run [process_gen.py](process_gen.py)
+
+```sh
+python3 process_gen.py
+```
+
+To input processes from terminal on each line: `<process name> <arrive time> <burst time> <priority>`
+
+Press <kbd>q</kbd> to close
